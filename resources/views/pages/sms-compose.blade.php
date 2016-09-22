@@ -17,7 +17,7 @@
 
 					@if (session('sendStatus'))
 						<div class="alert alert-success">
-							{{session('sendStatus')}}
+							{!! session('sendStatus') !!}
 						</div>
 					@endif
 

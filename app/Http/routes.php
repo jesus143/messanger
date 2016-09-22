@@ -31,9 +31,13 @@ Route::group(['prefix' => 'user'], function(){
 	Route::post("profile/update/{id?}", ['uses'=>'UserController@updateProfile', 'as'=> 'user.profile.update']);
 	Route::post("password/update/{id?}", ['uses'=>'UserController@updatePassword', 'as'=> 'user.password.update']);
 
-
 	Route::post('sms/send/', ['uses'=>'SmsController@sendSms', 'as'=> 'user.sms.send']);
+
+	Route::get('sms/settings/', ['uses'=>'SmsController@getSettings', 'as'=> 'user.sms.settings']);
+	Route::post('sms/settings/update', ['uses'=>'SmsController@updateSmsSettings', 'as'=> 'user.sms.settings.update']);
+
 	Route::resource("sms", "SmsController");
+
 });
 
 

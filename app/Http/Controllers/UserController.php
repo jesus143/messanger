@@ -225,10 +225,12 @@ class UserController extends Controller {
 		print "update user";
 	}
 
-
 	public function getContact()
 	{
-		$users = User::where('id', '<>' ,Auth::user()->id)->get();
+		$users = User::Where('id', '<>' ,Auth::user()->id)->paginate(5);
+
+		$users->setPath(route('user.contact'));
+
 		return view('pages.contact', compact('users', $users));
 	}
 }

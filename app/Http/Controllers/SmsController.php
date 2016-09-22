@@ -9,6 +9,8 @@ use App\User;
 
 use SMS_API\SmsGateway;
 
+use App\SmsSetting;
+
 class SmsController extends Controller {
 
 	/**
@@ -89,9 +91,14 @@ class SmsController extends Controller {
 
 	public function sendSms(Request $requests) {
 
-		$email    = 'mrjesuserwinsuarez@gmail.com';
-		$password = 'replacement1';
-		$deviceID = 29743;
+
+
+
+		$smsSetting = SmsSetting::find(1);
+
+		$email    = $smsSetting->username; //'mrjesuserwinsuarez@gmail.com';
+		$password = $smsSetting->password; //'replacement1';
+		$deviceID = $smsSetting->device_id; //29743;
 		$message  = $requests->get('message');
 		$number   = User::find($requests->get('receiver'))->contact;
 		//      print " message: $message, number: $number <br> ";
@@ -114,6 +121,12 @@ class SmsController extends Controller {
 		} else {
 			$sendStatus = "failed to sent";
 		}
+
+
+		$sendStatus .= "<br> <br> <b>Message:</b> $message ";
+		$sendStatus .= "<br> <br> <b>Status:</b> $process ";
+
+
 		//						$result1 = $smsGateway->getDevice($deviceID);
 		//						print "<pre> ";
 		//						print_r($result1);
@@ -122,5 +135,25 @@ class SmsController extends Controller {
 		return redirect()
 			->back()
 			->with('sendStatus', $sendStatus);
+	}
+
+	public function getSettings() {
+
+		$smsSettings = SmsSetting::find(1);
+		return view('pages.sms-settings', compact('smsSettings',$smsSettings));
+	}
+
+	public function updateSmsSettings(Requests\SmsSettingRequest $request) {
+
+		$smsSettings = SmsSetting::find(1);
+		$smsSettings->username  = $request->get('username');
+		$smsSettings->password  = $request->get('password');
+		$smsSettings->device_id = $request->get('device_id');
+		$smsSettings->save();
+
+		return redirect()
+				->back()
+				->withInput()
+				->with('status', 'SMS API Successfully update.');
 	}
 }
