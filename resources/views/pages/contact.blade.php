@@ -5,7 +5,11 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Team Members / Phone Book | <a href="{{route('user.create')}}" >Add New Contact </a></div>
+				<div class="panel-heading">Team Members / Phone Book
+					@if(Auth::user()->user_type == 1)
+						| <a href="{{route('user.create')}}" >Add New Contact </a>
+					@endif
+				</div>
 				<div class="panel-body">
 
 					@if (session('status'))
@@ -13,8 +17,6 @@
 							{{session('status')}}
 						</div>
 					@endif
-
-
 
 					<table class="table table-hover">
 						<thead>
@@ -48,6 +50,9 @@
 							@endforeach
 						</tbody>
 					</table>
+
+
+					{!! $users->render() !!}
 
 
 				</div>
