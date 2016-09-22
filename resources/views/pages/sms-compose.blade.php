@@ -15,9 +15,9 @@
 				<div class="panel-heading">Team Members</div>
 				<div class="panel-body">
 
-					@if (session('sendStatus'))
+					@if (session('statusMessage'))
 						<div class="alert alert-success">
-							{!! session('sendStatus') !!}
+							{!! session('statusMessage') !!}
 						</div>
 					@endif
 

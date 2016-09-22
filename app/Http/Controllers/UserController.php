@@ -186,8 +186,7 @@ class UserController extends Controller {
 
 
 		$validator =  Validator::make($request->all(), [
-				'password' => 'required|confirmed|min:6',
-				'old_password' => 'required'
+				'password' => 'required|confirmed|min:6'
 		]);
 
 		$error = false;
@@ -196,9 +195,11 @@ class UserController extends Controller {
 			$error = true;
 		} else {
 
-			if(!Auth::validate(['password'=>$request->get('old_password'), 'email'=>$email])){
-				$validator->errors()->add('old_password', 'Your old password is not correct.');
-				$error = true;
+			if(empty($id)) {
+				if (!Auth::validate(['password' => $request->get('old_password'), 'email' => $email])) {
+					$validator->errors()->add('old_password', 'Your old password is not correct.');
+					$error = true;
+				}
 			}
 		}
 

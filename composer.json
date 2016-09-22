@@ -19,7 +19,8 @@
 			"App\\": "app/"
 		},
 		"files": [
-			"storage/api/smsGateway.php"
+			"storage/api/smsGateway.php",
+			"storage/api/TextLocal.class.php"
 		]
 	},
 	"autoload-dev": {

@@ -57,10 +57,8 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{{ route('user.profile')}}">Profile</a></li>
-								@if(Auth::user()->user_type == 1)
-									<li><a href="{{ route('user.sms.settings') }}">Settings</a></li>
-								@endif
-									<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+								<li><a href="{{ route('user.sms.settings.view') }}">Settings</a></li>
+								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
 
 							</ul>
 						</li>

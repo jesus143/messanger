@@ -15,9 +15,13 @@ class CreateSmsSettingsTable extends Migration {
 		Schema::create('sms_settings', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->Integer('device_id');
+			$table->integer('user_id');
+			$table->integer('sms_third_party_id');
 			$table->string('username');
 			$table->string('password');
+			$table->string('app_key');
+			$table->string('secret_key');
+			$table->Integer('device_id');
 			$table->timestamps();
 		});
 	}

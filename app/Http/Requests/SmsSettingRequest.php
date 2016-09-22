@@ -24,7 +24,6 @@ class SmsSettingRequest extends Request {
 		return [
 				'username'=>'required',
 				'password'=>'required',
-				'device_id'=>'integer|min:1',
 		];
 	}
 
