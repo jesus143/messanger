@@ -30,7 +30,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">SMS <div style="clear:both;font-size: 9px;color: #9c9191;font-weight: normal;margin-top: -4px; ">Messanger Application</div>
+				<a class="navbar-brand" href="{{url('/')}}">SMS <div style="clear:both;font-size: 9px;color: #9c9191;font-weight: normal;margin-top: -4px; ">Messanger Application</div>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -38,19 +38,19 @@
 				@if (!Auth::guest())
 					<ul class="nav navbar-nav">
 						<li><a href="{{ url('/') }}">Home</a></li>
-						<li><a href="{{ url('/') }}">Contacts</a></li>
+						<li><a href="{{ route('user.profile')}}">Profile</a></li>
+						<li><a href="{{ route('user.contact') }}">Phonebook</a></li>
+
 					</ul>
 				@endif
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 						<li><a href="{{ url('/auth/login') }}">Login</a></li>
-						<li><a href="{{ url('/auth/register') }}">Register</a></li>
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Account</a></li>
 								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
 							</ul>
 						</li>
