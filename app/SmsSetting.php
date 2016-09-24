@@ -44,5 +44,5 @@ class SmsSetting extends Model {
 
         return (!empty($smsSettings))? $smsSettings : false;
     }
- 
+
 }

@@ -228,7 +228,7 @@ class UserController extends Controller {
 
 	public function getContact()
 	{
-		$users = User::Where('id', '<>' ,Auth::user()->id)->paginate(5);
+		$users = User::Where('id', '<>' ,Auth::user()->id)->paginate(12);
 
 		$users->setPath(route('user.contact'));
 
