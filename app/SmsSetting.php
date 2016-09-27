@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\SmsThirdParty;
 use Auth;
+use App\Http\Controllers\SmsSettingController;
 
 class SmsSetting extends Model {
 
@@ -32,17 +33,18 @@ class SmsSetting extends Model {
 
     public static function getUserSettings() {
         $thirdPartCurrentActive = SmsThirdParty::getCurrentActiveThirdParty();
-
         // get current active third party
         //        print "id = " . $thirdPartCurrentActive->id;
         //        print "current auth id " . Auth::user()->id;
-
         $sms_third_party_id = $thirdPartCurrentActive->id;
         $user_id =  Auth::user()->id;
-
         $smsSettings = self::Where(['user_id'=>$user_id, 'sms_third_party_id'=>$sms_third_party_id])->first();
-
         return (!empty($smsSettings))? $smsSettings : false;
+    }
+
+
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 
 }

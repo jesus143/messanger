@@ -34,7 +34,7 @@
 							@foreach($users as $user)
 								<tr>
 									<td>{{$user->name}}</td>
-									<td> {{$user->contact}} <a href="{{route('user.sms.show', ['id'=>$user->id] )}}"> <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></td>
+									<td> {{$user->contact}} <a href="{{route('user.sms.compose', ['id'=>$user->id] )}}"> <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></td>
 									<td>
 										@if($user->user_type == 1)
 											{{'Admin / Team Leader'}}

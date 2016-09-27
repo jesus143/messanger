@@ -34,6 +34,8 @@ Route::group(['prefix' => 'user'], function(){
     Route::post('sms/send/', ['uses'=>'SmsController@sendSms', 'as'=> 'user.sms.send']);
 	//	Route::get('sms/settings/', ['uses'=>'SmsController@getSettings', 'as'=> 'user.sms.settings']);
 	//Route::post('sms/settings/update', ['uses'=>'SmsController@updateSmsSettings', 'as'=> 'user.sms.settings.update']);
+	Route::get('sms/compose/{user_id}', ['uses'=>'SmsController@show', 'as'=> 'user.sms.compose'])->where('user_id', '[0-9]+');
+
 	Route::resource("sms", "SmsController");
 
 	////

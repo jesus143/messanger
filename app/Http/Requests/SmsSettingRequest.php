@@ -14,6 +14,7 @@ class SmsSettingRequest extends Request {
 		return true;
 	}
 
+
 	/**
 	 * Get the validation rules that apply to the request.
 	 *
@@ -24,6 +25,7 @@ class SmsSettingRequest extends Request {
 		return [
 				'username'=>'required',
 				'password'=>'required',
+				'device_id'=>'integer'
 		];
 	}
 

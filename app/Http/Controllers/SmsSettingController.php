@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\SmsThirdParty;
 use App\User;
 use Auth;
-
+use Illuminate\Validation\Validator;
 
 
 
@@ -87,32 +87,59 @@ class SmsSettingController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Requests\SmsSettingRequest $request)
+	public function update(Request $request)
 	{
 
-		// dd($request->all());
+
+		User::clearUserSelectedSettings();
+
+
+		// saving is not working...
+		//		$smsSetting = SmsSetting::find(1);
+		//		print "username = " .$smsSetting->user->contact;
+		//
+		//		dd($smsSetting);
+
+
+
 
 		$sms_third_party_id   = $request->get('sms_third_party_id');
+		$smsSetting = SmsSetting::Where(['user_id'=>Auth::user()->id, 'sms_third_party_id'=>$sms_third_party_id])->first();
 
-		if(!$smsSetting = SmsSetting::Where(['user_id'=>Auth::user()->id, 'sms_third_party_id'=>$sms_third_party_id])->first()) {
+
+//		dd($smsSetting);
+
+
+
+		if(count($smsSetting) < 1) {
+
+
 			$smsSetting = new SmsSetting();
+			$smsSetting->user_id         = Auth::user()->id;
+			$smsSetting->sms_third_party_id  = $sms_third_party_id;
 			$message = 'Successfully Added.';
-
-			$smsSetting->user_id 			= Auth::user()->id;
-			$smsSetting->sms_third_party_id = $sms_third_party_id;
-
 		} else {
+
 			$message = 'Successfully updated.';
+		}
+
+
+
+
+		if($sms_third_party_id==2){
+			$smsSetting->device_id 		    = $request->get('device_id');
 		}
 
 		$smsSetting->username = $request->get('username');
 		$smsSetting->password = $request->get('password');
+		$smsSetting->selected = (!empty($request->get('selected'))) ? $request->get('selected') : 0;
 
 		$smsSetting->save();
 
+
 		return redirect()
 				->back()
-				->with('status', $message);
+				->with('status_'.$request->get('sms_third_party_id'), $message);
 	}
 
 	/**

@@ -30,6 +30,11 @@
 						</div>
 
 						<div class="form-group">
+							<label for="usr">Selected sms provider:</label>
+							<span> {!! $selectedProviderName !!} </span>
+						</div>
+
+						<div class="form-group">
 							<label for="comment">Message:</label>
 							<textarea class="form-control" rows="5" id="comment" name="message"></textarea>
 						</div>
